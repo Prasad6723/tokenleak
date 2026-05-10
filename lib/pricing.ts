@@ -14,4 +14,14 @@ export const pricing = {
     individual: 10,
     business: 19,
   },
+
+  claude: {
+    pro: 20,
+    team: 30,
+  },
+
+  gemini: {
+    pro: 20,
+    ultra: 30,
+  },
 };

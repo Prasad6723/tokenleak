@@ -1,13 +1,20 @@
+type AuditResult = {
+  recommendation: string;
+  savings: number;
+  reason: string;
+};
+
 export function auditTool(
   tool: string,
   plan: string,
   seats: number
-) {
+): AuditResult {
+
   if (tool === "ChatGPT" && plan === "Team" && seats <= 2) {
     return {
       recommendation: "Switch to ChatGPT Plus",
       savings: 20,
-      reason: "Team plan is unnecessary for very small teams.",
+      reason: "Team plan is too expensive for very small teams.",
     };
   }
 
@@ -15,13 +22,21 @@ export function auditTool(
     return {
       recommendation: "Downgrade to Cursor Pro",
       savings: 20,
-      reason: "Business tier is excessive for solo usage.",
+      reason: "Business tier is unnecessary for solo developers.",
+    };
+  }
+
+  if (tool === "Copilot" && plan === "Business" && seats <= 2) {
+    return {
+      recommendation: "Switch to Copilot Individual",
+      savings: 9,
+      reason: "Business plan provides little value for tiny teams.",
     };
   }
 
   return {
-    recommendation: "Current plan looks optimized",
+    recommendation: "Current setup looks optimized",
     savings: 0,
-    reason: "No major savings opportunities found.",
+    reason: "No major savings opportunity detected.",
   };
 }
