@@ -120,7 +120,43 @@ useEffect(() => {
           </p>
 
         </div>
+        <div className="mt-10 bg-zinc-900 p-6 rounded-2xl">
 
+  <h2 className="text-2xl font-bold">
+    Get Full Report
+  </h2>
+
+  <p className="mt-2 text-zinc-400">
+    Save your audit and receive optimization updates.
+  </p>
+
+  <div className="mt-6 space-y-4">
+
+    <input
+      type="email"
+      placeholder="Email address"
+      className="w-full p-3 rounded-xl bg-zinc-800 border border-zinc-700"
+    />
+
+    <input
+      type="text"
+      placeholder="Company name"
+      className="w-full p-3 rounded-xl bg-zinc-800 border border-zinc-700"
+    />
+
+    <input
+      type="text"
+      placeholder="Your role"
+      className="w-full p-3 rounded-xl bg-zinc-800 border border-zinc-700"
+    />
+
+    <button className="w-full bg-white text-black py-3 rounded-xl font-semibold">
+      Save My Audit
+    </button>
+
+  </div>
+
+</div>
       </div>
       <footer className="mt-20 text-center text-zinc-500 text-sm">
   Built for the Credex Web Development Internship Assignment
