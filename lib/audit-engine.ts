@@ -33,7 +33,21 @@ export function auditTool(
       reason: "Business plan provides little value for tiny teams.",
     };
   }
+  if (tool === "Claude" && plan === "Team" && seats <= 2) {
+  return {
+    recommendation: "Switch to Claude Pro",
+    savings: 10,
+    reason: "Claude Team is unnecessary for tiny teams.",
+  };
+}
 
+if (tool === "Gemini" && plan === "Ultra" && seats === 1) {
+  return {
+    recommendation: "Downgrade to Gemini Pro",
+    savings: 10,
+    reason: "Ultra plan is expensive for solo usage.",
+  };
+}
   return {
     recommendation: "Current setup looks optimized",
     savings: 0,

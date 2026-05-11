@@ -21,8 +21,20 @@ export default function Home() {
         <p className="mt-4 text-zinc-400 text-lg">
           Audit your AI stack instantly and uncover hidden savings.
         </p>
+        <div className="mt-10 bg-white text-black p-8 rounded-3xl">
+  <p className="text-sm uppercase tracking-wide">
+    Estimated Savings
+  </p>
 
-        <div className="mt-10 space-y-6 bg-zinc-900 p-6 rounded-2xl">
+  <h2 className="text-6xl font-bold mt-2">
+    ${result.savings}
+  </h2>
+
+  <p className="mt-2 text-lg">
+    per month · ${result.savings * 12} yearly
+  </p>
+</div>
+        <div className="mt-10 space-y-6 bg-zinc-800 border border-zinc-700 p-6 rounded-2xl">
 
           <div>
             <label className="block mb-2 text-sm">
@@ -37,6 +49,8 @@ export default function Home() {
               <option>ChatGPT</option>
               <option>Cursor</option>
               <option>Copilot</option>
+              <option>Claude</option>
+              <option>Gemini</option>
             </select>
           </div>
 
@@ -71,7 +85,7 @@ export default function Home() {
 
         </div>
 
-        <div className="mt-10 bg-zinc-900 p-6 rounded-2xl">
+        <div className="mt-10 bg-zinc-800 border border-zinc-700 p-6 rounded-2xl">
 
           <h2 className="text-3xl font-bold">
             Suggested Optimization
@@ -92,6 +106,9 @@ export default function Home() {
         </div>
 
       </div>
+      <footer className="mt-20 text-center text-zinc-500 text-sm">
+  Built for the Credex Web Development Internship Assignment
+</footer>
     </main>
   );
 }
