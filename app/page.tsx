@@ -1,12 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { auditTool } from "@/lib/audit-engine";
 
 export default function Home() {
   const [tool, setTool] = useState("ChatGPT");
   const [plan, setPlan] = useState("Team");
   const [seats, setSeats] = useState(1);
+
+  useEffect(() => {
+  const savedTool = localStorage.getItem("tool");
+  const savedPlan = localStorage.getItem("plan");
+  const savedSeats = localStorage.getItem("seats");
+
+  if (savedTool) setTool(savedTool);
+  if (savedPlan) setPlan(savedPlan);
+  if (savedSeats) setSeats(Number(savedSeats));
+}, []);
+
+useEffect(() => {
+  localStorage.setItem("tool", tool);
+  localStorage.setItem("plan", plan);
+  localStorage.setItem("seats", seats.toString());
+}, [tool, plan, seats]);
 
   const result = auditTool(tool, plan, seats);
 
