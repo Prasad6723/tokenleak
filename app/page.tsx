@@ -11,32 +11,55 @@ export default function Home() {
   const [plan, setPlan] = useState("Team");
   const [seats, setSeats] = useState(1);
 
+  const [teamSize, setTeamSize] = useState(1);
+  const [useCase, setUseCase] = useState("Coding");
+
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
   const [role, setRole] = useState("");
+  const [website, setWebsite] = useState("");
 
   const [summary, setSummary] = useState("");
   const [loadingSummary, setLoadingSummary] = useState(false);
 
   useEffect(() => {
+
     const savedTool = localStorage.getItem("tool");
     const savedPlan = localStorage.getItem("plan");
     const savedSeats = localStorage.getItem("seats");
+    const savedTeamSize = localStorage.getItem("teamSize");
+    const savedUseCase = localStorage.getItem("useCase");
 
     if (savedTool) setTool(savedTool);
     if (savedPlan) setPlan(savedPlan);
     if (savedSeats) setSeats(Number(savedSeats));
+    if (savedTeamSize) setTeamSize(Number(savedTeamSize));
+    if (savedUseCase) setUseCase(savedUseCase);
+
   }, []);
 
   useEffect(() => {
+
     localStorage.setItem("tool", tool);
     localStorage.setItem("plan", plan);
     localStorage.setItem("seats", seats.toString());
-  }, [tool, plan, seats]);
+    localStorage.setItem("teamSize", teamSize.toString());
+    localStorage.setItem("useCase", useCase);
+
+  }, [tool, plan, seats, teamSize, useCase]);
 
   const result = auditTool(tool, plan, seats);
 
   async function saveLead() {
+
+    if (website) {
+      return;
+    }
+
+    if (!email || !company || !role) {
+      alert("Please fill all fields.");
+      return;
+    }
 
     setLoadingSummary(true);
 
@@ -77,44 +100,45 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-black text-white p-10">
 
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-4xl mx-auto">
 
-        <h1 className="text-5xl font-bold">
+        <h1 className="text-6xl font-bold leading-tight">
           Stop Overpaying for AI Tools
         </h1>
 
-        <p className="mt-4 text-zinc-400 text-lg">
-          Audit your AI stack instantly and uncover hidden savings.
+        <p className="mt-6 text-zinc-400 text-xl leading-8">
+          Audit your AI stack instantly, identify overspending,
+          and uncover hidden savings opportunities across your organization.
         </p>
 
-        <div className="mt-10 bg-white text-black p-8 rounded-3xl">
+        <div className="mt-10 bg-white text-black p-8 rounded-3xl shadow-2xl">
 
           <p className="text-sm uppercase tracking-wide">
             Estimated Savings
           </p>
 
-          <h2 className="text-6xl font-bold mt-2">
+          <h2 className="text-7xl font-bold mt-3">
             ${result.savings}
           </h2>
 
-          <p className="mt-2 text-lg">
+          <p className="mt-3 text-xl">
             per month · ${result.savings * 12} yearly
           </p>
 
         </div>
 
-        <div className="mt-10 space-y-6 bg-zinc-900 border border-zinc-700 p-6 rounded-2xl">
+        <div className="mt-10 space-y-6 bg-zinc-900 border border-zinc-700 p-8 rounded-3xl">
 
           <div>
 
-            <label className="block mb-2 text-sm">
-              Tool
+            <label className="block mb-2 text-sm text-zinc-400">
+              AI Tool
             </label>
 
             <select
               value={tool}
               onChange={(e) => setTool(e.target.value)}
-              className="w-full p-3 rounded-xl bg-zinc-800 border border-zinc-700"
+              className="w-full p-4 rounded-xl bg-zinc-800 border border-zinc-700"
             >
               <option>ChatGPT</option>
               <option>Claude</option>
@@ -130,14 +154,14 @@ export default function Home() {
 
           <div>
 
-            <label className="block mb-2 text-sm">
-              Plan
+            <label className="block mb-2 text-sm text-zinc-400">
+              Current Plan
             </label>
 
             <select
               value={plan}
               onChange={(e) => setPlan(e.target.value)}
-              className="w-full p-3 rounded-xl bg-zinc-800 border border-zinc-700"
+              className="w-full p-4 rounded-xl bg-zinc-800 border border-zinc-700"
             >
               <option>Free</option>
               <option>Hobby</option>
@@ -159,48 +183,100 @@ export default function Home() {
 
           <div>
 
-            <label className="block mb-2 text-sm">
-              Seats
+            <label className="block mb-2 text-sm text-zinc-400">
+              Number of Seats
             </label>
 
             <input
               type="number"
               value={seats}
               onChange={(e) => setSeats(Number(e.target.value))}
-              className="w-full p-3 rounded-xl bg-zinc-800 border border-zinc-700"
+              className="w-full p-4 rounded-xl bg-zinc-800 border border-zinc-700"
             />
+
+          </div>
+
+          <div>
+
+            <label className="block mb-2 text-sm text-zinc-400">
+              Team Size
+            </label>
+
+            <input
+              type="number"
+              value={teamSize}
+              onChange={(e) => setTeamSize(Number(e.target.value))}
+              className="w-full p-4 rounded-xl bg-zinc-800 border border-zinc-700"
+            />
+
+          </div>
+
+          <div>
+
+            <label className="block mb-2 text-sm text-zinc-400">
+              Primary Use Case
+            </label>
+
+            <select
+              value={useCase}
+              onChange={(e) => setUseCase(e.target.value)}
+              className="w-full p-4 rounded-xl bg-zinc-800 border border-zinc-700"
+            >
+              <option>Coding</option>
+              <option>Writing</option>
+              <option>Research</option>
+              <option>Data Analysis</option>
+              <option>Mixed</option>
+            </select>
 
           </div>
 
         </div>
 
-        <div className="mt-10 bg-zinc-900 border border-zinc-700 p-6 rounded-2xl">
+        <div className="mt-10 bg-zinc-900 border border-zinc-700 p-8 rounded-3xl">
 
-          <h2 className="text-3xl font-bold">
+          <h2 className="text-4xl font-bold">
             Suggested Optimization
           </h2>
 
-          <p className="mt-4 text-xl">
+          <p className="mt-6 text-2xl">
             {result.recommendation}
           </p>
 
-          <p className="mt-4 text-green-400 text-2xl font-bold">
+          <p className="mt-6 text-green-400 text-3xl font-bold">
             Save ${result.savings}/month
           </p>
 
-          <p className="mt-4 text-zinc-400">
+          <p className="mt-6 text-zinc-400 leading-7">
             {result.reason}
           </p>
 
+          {result.savings > 500 && (
+
+            <div className="mt-8 bg-green-500/10 border border-green-500 p-5 rounded-2xl">
+
+              <h3 className="text-2xl font-bold text-green-400">
+                High Savings Opportunity Detected
+              </h3>
+
+              <p className="mt-3 text-zinc-300">
+                Credex may help reduce your infrastructure costs even further
+                through discounted AI infrastructure credits and enterprise optimization.
+              </p>
+
+            </div>
+
+          )}
+
         </div>
 
-        <div className="mt-10 bg-zinc-900 border border-zinc-700 p-6 rounded-2xl">
+        <div className="mt-10 bg-zinc-900 border border-zinc-700 p-8 rounded-3xl">
 
-          <h2 className="text-2xl font-bold">
+          <h2 className="text-3xl font-bold">
             Get Full Report
           </h2>
 
-          <p className="mt-2 text-zinc-400">
+          <p className="mt-3 text-zinc-400 leading-7">
             Save your audit and receive optimization updates.
           </p>
 
@@ -211,7 +287,7 @@ export default function Home() {
               placeholder="Email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-3 rounded-xl bg-zinc-800 border border-zinc-700"
+              className="w-full p-4 rounded-xl bg-zinc-800 border border-zinc-700"
             />
 
             <input
@@ -219,7 +295,7 @@ export default function Home() {
               placeholder="Company name"
               value={company}
               onChange={(e) => setCompany(e.target.value)}
-              className="w-full p-3 rounded-xl bg-zinc-800 border border-zinc-700"
+              className="w-full p-4 rounded-xl bg-zinc-800 border border-zinc-700"
             />
 
             <input
@@ -227,36 +303,47 @@ export default function Home() {
               placeholder="Your role"
               value={role}
               onChange={(e) => setRole(e.target.value)}
-              className="w-full p-3 rounded-xl bg-zinc-800 border border-zinc-700"
+              className="w-full p-4 rounded-xl bg-zinc-800 border border-zinc-700"
+            />
+
+            <input
+              type="text"
+              placeholder="Website"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+              className="hidden"
             />
 
             <button
               onClick={saveLead}
-              className="w-full bg-white text-black py-3 rounded-xl font-semibold"
+              disabled={loadingSummary}
+              className="w-full bg-white text-black py-4 rounded-xl font-semibold hover:opacity-90 transition"
             >
-              Save My Audit
+              {loadingSummary
+                ? "Generating Audit..."
+                : "Save My Audit"}
             </button>
 
           </div>
 
         </div>
 
-        <div className="mt-10 bg-zinc-900 border border-zinc-700 p-6 rounded-2xl">
+        <div className="mt-10 bg-zinc-900 border border-zinc-700 p-8 rounded-3xl">
 
-          <h2 className="text-2xl font-bold">
+          <h2 className="text-3xl font-bold">
             AI Generated Audit Summary
           </h2>
 
           {loadingSummary ? (
 
-            <p className="mt-4 text-zinc-400">
-              Generating personalized summary...
+            <p className="mt-6 text-zinc-400">
+              Generating personalized audit summary...
             </p>
 
           ) : (
 
-            <p className="mt-4 text-zinc-300 leading-7 whitespace-pre-line">
-              {summary || "Save your audit to generate an AI summary."}
+            <p className="mt-6 text-zinc-300 leading-8 whitespace-pre-line">
+              {summary || "Save your audit to generate a personalized AI summary."}
             </p>
 
           )}
@@ -265,7 +352,7 @@ export default function Home() {
 
       </div>
 
-      <footer className="mt-20 text-center text-zinc-500 text-sm">
+      <footer className="mt-24 text-center text-zinc-500 text-sm">
         Built for the Credex Web Development Internship Assignment
       </footer>
 

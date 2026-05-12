@@ -17,7 +17,7 @@ export function auditTool(
       recommendation: "Switch to ChatGPT Plus",
       savings: 20,
       reason:
-        "ChatGPT Team pricing is difficult to justify for very small teams.",
+        "Small teams usually do not benefit enough from ChatGPT Team collaboration features.",
     };
   }
 
@@ -26,7 +26,7 @@ export function auditTool(
       recommendation: "Downgrade to ChatGPT Team",
       savings: 150,
       reason:
-        "Enterprise pricing is excessive for small collaborative teams.",
+        "Enterprise plans become cost-effective only for larger organizations with strict compliance requirements.",
     };
   }
 
@@ -37,7 +37,7 @@ export function auditTool(
       recommendation: "Switch to Claude Pro",
       savings: 20,
       reason:
-        "Claude Team adds unnecessary collaboration overhead for tiny teams.",
+        "Claude Team pricing is difficult to justify for very small teams.",
     };
   }
 
@@ -46,7 +46,7 @@ export function auditTool(
       recommendation: "Downgrade to Claude Pro",
       savings: 80,
       reason:
-        "Claude Max is expensive for solo usage unless usage volume is extremely high.",
+        "Claude Max is optimized for extremely heavy individual usage.",
     };
   }
 
@@ -57,7 +57,7 @@ export function auditTool(
       recommendation: "Switch to Cursor Pro",
       savings: 20,
       reason:
-        "Cursor Business features rarely justify the additional cost for solo developers.",
+        "Solo developers rarely utilize Cursor Business collaboration capabilities.",
     };
   }
 
@@ -66,7 +66,7 @@ export function auditTool(
       recommendation: "Downgrade to Cursor Business",
       savings: 100,
       reason:
-        "Enterprise tooling is unnecessary for very small engineering teams.",
+        "Enterprise engineering tooling is unnecessary for very small teams.",
     };
   }
 
@@ -77,7 +77,7 @@ export function auditTool(
       recommendation: "Switch to Copilot Individual",
       savings: 9,
       reason:
-        "GitHub Copilot Business adds little value for tiny teams.",
+        "Copilot Business provides limited additional value for tiny engineering teams.",
     };
   }
 
@@ -86,7 +86,7 @@ export function auditTool(
       recommendation: "Downgrade to Copilot Business",
       savings: 100,
       reason:
-        "Enterprise compliance features are likely underutilized at this scale.",
+        "Enterprise governance features are often unnecessary for small teams.",
     };
   }
 
@@ -101,23 +101,25 @@ export function auditTool(
     };
   }
 
-  // API usage
+  // OpenAI API
 
   if (tool === "OpenAI API") {
     return {
-      recommendation: "Consider prepaid infrastructure credits",
+      recommendation: "Use discounted infrastructure credits",
       savings: 100,
       reason:
-        "Many startups overpay retail API pricing instead of using discounted infrastructure credits.",
+        "Many startups overpay standard API pricing instead of using infrastructure credit programs.",
     };
   }
 
+  // Anthropic API
+
   if (tool === "Anthropic API") {
     return {
-      recommendation: "Consider discounted Anthropic credits",
+      recommendation: "Use discounted Anthropic credits",
       savings: 120,
       reason:
-        "Committed usage discounts and infrastructure credits can reduce direct Anthropic API costs significantly.",
+        "Committed usage agreements often reduce Anthropic API costs significantly.",
     };
   }
 
@@ -128,7 +130,7 @@ export function auditTool(
       recommendation: "Switch to Windsurf Pro",
       savings: 15,
       reason:
-        "Teams pricing provides limited collaboration benefit for tiny teams.",
+        "Windsurf Teams features are underutilized by very small teams.",
     };
   }
 
