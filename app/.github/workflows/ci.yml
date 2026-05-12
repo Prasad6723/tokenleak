@@ -6,12 +6,10 @@ on:
       - main
 
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -20,11 +18,8 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install Dependencies
+      - name: Install
         run: npm install
 
-      - name: Run Lint
-        run: npm run lint
-
-      - name: Build Project
-        run: npm run build
+      - name: Run Tests
+        run: npm test
